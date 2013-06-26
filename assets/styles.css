@@ -1,0 +1,24 @@
+body {
+
+  background-color: #aaa;
+
+}
+
+table {
+
+  background-color: #fff;
+  font-family: "Courier New";
+
+}
+
+tr.state td {
+
+  text-align: right;
+  vertical-align: middle;
+
+}
+
+td.gain { background-color: #DFF0BA; }
+td.gain-more { background-color: #d0e9c6; }
+td.lose { background-color: #f2dede; }
+td.lose-more { background-color: #ebcccc; }

@@ -7,7 +7,7 @@ class Apportion
     @population = {}
     @seats = {}
 
-    File.readlines("data/2010.csv").each do |line|
+    File.readlines("../data/2010.csv").each do |line|
       state, pop = line.split(',').map(&:chomp)
       
       @seats[state] = 1
