@@ -4,10 +4,23 @@ body {
 
 }
 
+body, td:first-child {
+  
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
+  font-weight: 300;
+
+}
+
 table {
 
   background-color: #fff;
   font-family: "Courier New";
+
+}
+
+h1 {
+
+  font-family: Helvetica, Arial, sans-serif;
 
 }
 
@@ -42,5 +55,6 @@ div.small {
 
   opacity: 0.6;
   font-size: 8pt;
+  margin-bottom: 10px;
 
 }

@@ -29,10 +29,10 @@ $(document).ready(function() {
 
         states.push(state_name);
 
-        items.push('<td class="state">'+ state_name +'</td>');
-        items.push('<td class="current-population">'+ pop2010 +'</td>');
-        items.push('<td class="projected-population">'+ pop2020 +'</td>');
-        items.push('<td data-value="'+ percentage +'">'+ percentage +'%</td>');
+        items.push('<td class="state">' + state_name + '</td>');
+        items.push('<td class="current-population hidden-phone">' + pop2010 + '</td>');
+        items.push('<td class="projected-population hidden-phone">' + pop2020 + '</td>');
+        items.push('<td class="hidden-phone" data-value="' + percentage + '">' + percentage + '%</td>');
         items.push('<td class="current-apportionment"></td>');
         items.push('<td class="projected-apportionment"></td>');
         items.push('<td class="difference"></td>');
