@@ -22,3 +22,18 @@ td.gain { background-color: #DFF0BA; }
 td.gain-more { background-color: #d0e9c6; }
 td.lose { background-color: #f2dede; }
 td.lose-more { background-color: #ebcccc; }
+
+.table th {
+
+  text-align: right;
+
+}
+
+th small {
+
+  font-size: 8pt;
+  text-transform: uppercase;
+  color: #ddd;
+  float: left;
+
+}
