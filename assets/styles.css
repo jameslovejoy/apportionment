@@ -1,6 +1,6 @@
 body {
 
-  background-color: #aaa;
+  background: #ccc url("whitey.png");
 
 }
 
@@ -35,5 +35,12 @@ th small {
   text-transform: uppercase;
   color: #ddd;
   float: left;
+
+}
+
+div.small {
+
+  opacity: 0.6;
+  font-size: 8pt;
 
 }
