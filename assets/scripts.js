@@ -1,15 +1,28 @@
-/* Copyright 2013 
- * 
+/* Copyright 2013-14
+ *
  * Author: James Lovejoy
- * License: MIT 
+ * License: MIT
  */
-$(document).ready(function() {  
+$(document).ready(function() {
   var $dataSource = $("select.source");
   var $tBody = $("tbody");
 
   // Function to get the Max value in Array
   Array.max = function( array ){
       return Math.max.apply( Math, array );
+  };
+
+  var toggleChanges = function(){
+    var showChangesOnly = $("#toggleChanges").is(":checked");
+
+    $("tr.state").toggle(!showChangesOnly);
+    $("tr.state.gain, tr.state.lose, tr.state.gain-more, tr.state.lose-more").show(showChangesOnly);
+  };
+
+  var bindToggleChanges = function(){
+    $("#toggleChanges").on("change", function(){
+      toggleChanges();
+    });
   };
 
   var runProjection = function(){
@@ -23,24 +36,44 @@ $(document).ready(function() {
       $.each(data, function(index, state) {
         var items = [];
         var state_name = state.state;
+
+        var popStart = state.estimate.start.population;
+        var popFinish = state.estimate.finish.population;
+        var popChange = popStart < popFinish ? '+' + (popFinish-popStart) : popFinish-popStart;
+        var startYear = state.estimate.start.year;
+        var finishYear = state.estimate.finish.year;
+        $('#startYear').text(startYear);
+        $('#finishYear').text(finishYear);
+
         var pop2010 = state.pop2010;
         var percentage = Math.round(state.change*10000)/100;
         var pop2020 = Math.round(pop2010 * (percentage / 100)) + parseInt(pop2010);
 
-        states.push(state_name);
+        if( state_name == 'United States') {
 
-        items.push('<td class="state">' + state_name + '</td>');
-        items.push('<td class="current-population hidden-phone">' + pop2010 + '</td>');
-        items.push('<td class="projected-population hidden-phone">' + pop2020 + '</td>');
-        items.push('<td class="hidden-phone" data-value="' + percentage + '">' + percentage + '%</td>');
-        items.push('<td class="current-apportionment"></td>');
-        items.push('<td class="projected-apportionment"></td>');
-        items.push('<td class="difference"></td>');
-   
-        $('<tr/>', {
-          'class': 'state',
-          html: items.join('')
-        }).appendTo('tbody');
+          $("#US-popStart").text(popStart);
+          $("#US-popFinish").html('<abbr title="' + popChange + ' since ' + startYear + '">' + popFinish + '</abbr>');
+          $("#US-popChange").html('<abbr title="' + state.note + '">' + percentage + '%</abbr>');
+          $("#US-popEst").text(Math.round(pop2010 * (percentage / 100)) + parseInt(pop2010));
+
+        } else {
+          states.push(state_name);
+
+          items.push('<td class="state">' + state_name + '</td>');
+          items.push('<td class="current-population hidden-phone">' + popStart + '</td>');
+          items.push('<td class="estimated-population hidden-phone"><abbr title="' + popChange + ' since ' + startYear + '">' + popFinish + '</abbr></td>');
+          items.push('<td class="hidden-phone" data-value="' + percentage + '"><abbr title="' + state.note + '">' + percentage + '%</abbr></td>');
+          items.push('<td class="projected-population hidden-phone">' + pop2020 + '</td>');
+          items.push('<td class="current-apportionment"></td>');
+          items.push('<td class="projected-apportionment"></td>');
+          items.push('<td class="difference"></td>');
+
+          $('<tr/>', {
+            'class': 'state',
+            html: items.join('')
+          }).appendTo('tbody');
+
+        }
       });
     }).done(function(){
 
@@ -64,6 +97,8 @@ $(document).ready(function() {
       $.bootstrapSortable();
       $tBody.css({opacity: 1});
 
+      toggleChanges();
+
     });
 
     runApportionment = function(population_column, output_column) {
@@ -80,7 +115,7 @@ $(document).ready(function() {
         var pop = population[index];
         var n =  seats[state];
         var priority = pop / Math.sqrt(n*(n+1));
-        
+
         return priority;
       });
 
@@ -111,5 +146,6 @@ $(document).ready(function() {
   });
 
   runProjection();
+  bindToggleChanges();
 
 });

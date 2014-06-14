@@ -9,7 +9,7 @@ class Apportion
 
     File.readlines("../data/2010.csv").each do |line|
       state, pop = line.split(',').map(&:chomp)
-      
+
       @seats[state] = 1
       @population[state] = pop.to_i
     end
@@ -32,6 +32,7 @@ class Apportion
     return highest_state
   end
 
+  # 435 seats: Every state gets 1 to start, leaving 385 left to apportion.
   def apportion
     385.times do |n|
       state = find_highest_priority

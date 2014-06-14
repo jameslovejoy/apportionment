@@ -8,47 +8,67 @@
     <link href="assets/styles.css" rel="stylesheet" media="screen">
     <link href="assets/bootstrap-sortable.css" rel="stylesheet" media="screen">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/scripts.js"></script>
     <script src="assets/bootstrap-sortable.js"></script>
+
+</style>
   </head>
   <body>
     <div class="row row-fluid">
       <div class="text-center">
-    
+
         <h1>Apportionment 2020</h1>
         <p class="lead">Projecting re-apportionment of the House of Representatives using the Huntington-Hill method.</p>
 
         <form class="form-inline">
-          <label>If population growth continues at the same rates as 
+          <label>If population growth continues at the same rates as
           <select class="source">
             <option value="data/population-2000-2010.json">from 2000 to 2010</option>
+            <option disabled="disabled">----------------</option>
             <option value="data/population-2010-2011.json">from 2010 to 2011</option>
-            <option value="data/population-2010-2012.json" selected>from 2010 to 2012</option>
+            <option value="data/population-2010-2012.json">from 2010 to 2012</option>
+            <option value="data/population-2010-2013.json" selected>from 2010 to 2013</option>
+            <option disabled="disabled">----------------</option>
+            <option value="data/population-2011-2012.json">from 2011 to 2012</option>
+            <option value="data/population-2011-2013.json">from 2011 to 2013</option>
+            <option value="data/population-2012-2013.json">from 2012 to 2013</option>
           </select>
           </label>
+          <br/><label><input type="checkbox" id="toggleChanges"/> Only show states with changes</label>
         </p>
       </div>
     </div>
 
     <div class="row row-fluid">
       <div class="span10 offset1">
-
         <table class="table table-hover table-bordered table-condensed">
           <thead>
             <tr>
-              <th data-defaultsort="asc">&nbsp;</th>
-              <th style="width: 12%" class="hidden-phone">2010 <small>Actual</small></th>
-              <th style="width: 12%" class="hidden-phone">2020 <small>Proj.</small></th>
-              <th style="width: 10%" class="hidden-phone"><small>Pct. Growth</small></th>
-              <th style="width: 12%">2010 <small>Actual</small></th>
-              <th style="width: 12%">2020 <small>Proj.</small></th>
-              <th style="width: 10%">&nbsp;</th>
+              <th style="width: 16%" data-defaultsort="asc">&nbsp;</th>
+              <th style="width: 10%" class="hidden-phone"><span id="startYear">2010</span> <small>Pop.</small></th>
+              <th style="width: 10%" class="hidden-phone"><span id="finishYear">XXXX</span> <small>Pop.</small></th>
+              <th style="width: 13%" class="hidden-phone"><small>Growth</small> 2010 &rarr; 2020</th>
+              <th style="width: 13%" class="hidden-phone">2020 <small>Projected</small></th>
+              <th style="width: 9%">2010<small>Current</small></th>
+              <th style="width: 9%">2020<small>Projected</small></th>
+              <th style="width: 5%"><small>Change</small></th>
             </tr>
           </thead>
           <tbody>
           </tbody>
+          <tfoot>
+            <tr>
+              <td>United States</td>
+              <td class="hidden-phone" id="US-popStart">300000000</td>
+              <td class="hidden-phone" id="US-popFinish">315000000</td>
+              <td class="hidden-phone" id="US-popChange">+3%</td>
+              <td class="hidden-phone" id="US-popEst">330000000</td>
+              <td >435</td>
+              <td >435</td>
+              <td ></td>
+          </tfoot>
         </table>
 
       </div>
@@ -56,7 +76,7 @@
 
     <div class="row row-fluid">
       <div class="text-center small">
-        Sources: <a href="http://www.census.gov/popest/data/historical/2000s/vintage_2009/" target="_blank">Census 2000</a>, <a href="http://www.census.gov/popest/data/datasets.html" target="_blank">Census 2010</a>, <a href="http://en.wikipedia.org/wiki/Huntington%E2%80%93Hill_method" target="_blank">Wikipedia</a>
+        Sources: <a href="http://www.census.gov/popest/data/historical/2000s/vintage_2009/" target="_blank">Census 2000</a>, <a href="http://www.census.gov/popest/data/datasets.html" target="_blank">Census 2010+</a>, <a href="http://en.wikipedia.org/wiki/Huntington%E2%80%93Hill_method" target="_blank">Wikipedia</a>
       </div>
     </div>
 
