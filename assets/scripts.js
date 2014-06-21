@@ -1,8 +1,3 @@
-/* Copyright 2013-14
- *
- * Author: James Lovejoy
- * License: MIT
- */
 $(document).ready(function() {
   var $dataSource = $("select.source");
   var $tBody = $("tbody");

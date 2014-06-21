@@ -1,8 +1,3 @@
-# Copyright 2013-14
-#
-# Author: James Lovejoy
-# License: MIT
-#
 require 'csv'
 require 'open-uri'
 
