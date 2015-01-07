@@ -30,7 +30,7 @@ end
 states = []
 data.each do |region|
   state_name = region['NAME']
-  next if ['Northeast Region', 'Midwest Region', 'South Region', 'West Region', 'District of Columbia', 'Puerto Rico Commonwealth'].include?(state_name)
+  next if ['Northeast Region', 'Midwest Region', 'South Region', 'West Region', 'District of Columbia', 'Puerto Rico'].include?(state_name)
 
   state = {'name' => state_name}
   state[base_year] = region["ESTIMATESBASE#{base_year}"]
@@ -54,7 +54,7 @@ calculations.each do |initial_year, estimate_years|
 
       # Extrapolate the percentage change over entire decade
       months_for_extrapolation = 120
-      projected_change = (1.0 + percent_change) ** (months_for_extrapolation/months_since_base) - 1.0
+      projected_change = (1.0 + percent_change) ** (months_for_extrapolation/months_since_base.to_f) - 1.0
       note = "#{(percent_change*100.0).round(2)}% growth over #{months_since_base} months = #{(projected_change*100.0).round(2)}% growth over #{months_for_extrapolation} months"
 
       # Gather information to output
