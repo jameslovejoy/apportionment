@@ -32,11 +32,19 @@ $(document).ready(function() {
         var items = [];
         var state_name = state.state;
 
-        var popStart = state.estimate.start.population;
-        var popFinish = state.estimate.finish.population;
-        var popChange = popStart < popFinish ? '+' + (popFinish-popStart) : popFinish-popStart;
-        var startYear = state.estimate.start.year;
-        var finishYear = state.estimate.finish.year;
+        if (state.estimate) {
+          var popStart = state.estimate.start.population;
+          var popFinish = state.estimate.finish.population;
+          var popChange = popStart < popFinish ? '+' + (popFinish-popStart) : popFinish-popStart;
+          var startYear = state.estimate.start.year;
+          var finishYear = state.estimate.finish.year;
+        } else {
+          var popStart = state.pop2000;
+          var popFinish = state.pop2010;
+          var popChange = popStart < popFinish ? '+' + (popFinish-popStart) : popFinish-popStart;
+          var startYear = 2000;
+          var finishYear = 2010;
+        }
         $('#startYear').text(startYear);
         $('#finishYear').text(finishYear);
 
@@ -124,9 +132,13 @@ $(document).ready(function() {
         seats[state] = 1;
       });
 
+      // 435 seats: Every state gets 1 to start, leaving 385 left to apportion.
       for(n = 0; n < 385; n++) {
         highest = findHighestPriorityState(population);
         seats[highest] += 1;
+
+        seat_number = 51 + n;
+        console.log("Assigning Seat " + seat_number + " to " + highest);
       }
 
       return seats;

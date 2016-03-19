@@ -3,7 +3,7 @@ require 'open-uri'
 
 if ARGV.size < 1
   $stderr.puts "Usage: #{$0} census.csv"
-  $stderr.puts "\nExample: #{$0} http://www.census.gov/popest/data/national/totals/2013/files/NST-EST2013-popchg2010_2013.csv"
+  $stderr.puts "\nExample: #{$0} http://www.census.gov/popest/data/national/totals/2015/files/NST-EST2015-popchg2010_2015.csv"
 
   exit
 end
