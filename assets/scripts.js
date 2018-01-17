@@ -20,6 +20,9 @@ $(document).ready(function() {
     });
   };
 
+  var mapProjectionData = {};
+  var mapChangesData = {};
+
   var runProjection = function(){
     var states = [];
     var seats = {};
@@ -91,10 +94,16 @@ $(document).ready(function() {
         var difference = projected - current;
         var sign = (difference > 0 ? "+" : "");
         var klass = (difference > 1) ? "gain-more" : (difference == 1 ? "gain" : (difference == -1 ? "lose" : (difference < -1 ? "lose-more" : "")));
+        if (difference != 0 ) {
+          mapChangesData[$tr.find("td.state").text()] = difference;
+        }
 
         $tr.addClass(klass);
         $tr.find("td.difference").addClass(klass).text( sign + difference );
       });
+
+      new Chartkick.GeoChart("map-projection", mapProjectionData, {"library": {"region": "US", "resolution": "provinces", "colorAxis": []} });
+      new Chartkick.GeoChart("map-changes", mapChangesData, {"library": {"region": "US", "resolution": "provinces", "colorAxis": {"colors": ['salmon', 'lightsalmon', 'white', 'lime', 'limegreen'], "minValue": -4, "maxValue": 4}, "defaultColor": 'white' } });
 
       $("table").addClass("sortable");
       $.bootstrapSortable();
@@ -109,7 +118,8 @@ $(document).ready(function() {
       var seats = apportion(population);
 
       jQuery.each( output_column, function(index, td) {
-        $(td).text(seats[states[index]]); 
+        $(td).text(seats[states[index]]);
+        mapProjectionData[states[index]] = seats[states[index]];
       });
     }
 
